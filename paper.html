@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction &#8212; 2020 T1 Reproducibility Challenge</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/paper.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+Quantitative MRI (qMRI) has a reproducibility problem (Keenan et al. 2019). Despite the promise that qMRI improves specificity and reproducibility of measurements over clinical MRI scans, few qMRI techniques have entered the clinic. Even the most fundamental MR parameters cannot be measured with sufficient reproducibility and precision across clinical scanners to pass the second of six stages of technical assessment for clinical biomarkers (Fryback and Thornbury 1991; Schweitzer 2016; Seiberlich et al. 2020). Nearly half a century has passed since the first quantitative MRI maps (spin-lattice relaxation time, T1) were reported (Pykett and Mansfield 1978), yet there is still disagreement in reported values for his fundamental parameter (T1) across different sites, vendors, and implementations (Stikov et al. 2015). 
+</p>
+<p style="text-align:justify;">
+Amongst fundamental MRI parameters, T1 holds significant importance. It represents the time it takes for longitudinal magnetization to recover after being disturbed by an RF pulse. The T1 value varies based on molecular mobility and magnetic field strength (Bottomley et al. 1984; Wansapura et al. 1999; Dieringer et al. 2014), making it a valuable parameter for distinguishing between tissue types. Accurate knowledge of T1 values is essential for optimizing clinical MRI pulse sequences for contrast and time efficiency (Ernst and Anderson 1966; Redpath and Smith 1994; Tofts 1997) and as a calibration parameter for other quantitative MRI techniques (Sled and Pike 2001; Yuan et al. 2012). Amongst the number of techniques to measure T1, inversion recovery (IR) (Drain 1949; Hahn 1949) is widely held as being the gold standard T1 mapping technique, as it is very robust against other effects (e.g. B1 inhomogeneity) or potential errors in measurements (e.g. insufficient spoiling) (Stikov et al. 2015). However, because the technique requires a long repetition time (TR > T1), it is very slow and impractical for whole-organ measurements, limiting its clinical use. In practice, it is mostly used as a reference to validate other T1 mapping techniques, such as variable flip angle imaging (VFA) (Fram et al. 1987; Deoni, Rutt, and Peters 2003; Cheng and Wright 2006) and MP2RAGE (Marques et al. 2010). 
+</p>
+<p style="text-align:justify;">
+Efforts have been made to develop quantitative MRI phantoms to assist in standardizing T1 mapping methods (Keenan et al. 2018). A quantitative MRI standard system phantom was created in a joint project between ISMRM and the National Institute of Standards and Technology (NIST) (Stupic et al. 2021), and has since been commercialized (Premium System Phantom, CaliberMRI, Boulder, Colorado). The spherical phantom has a 57-element fiducial array containing spheres with doped liquids that model a wide range of T1, T2, and PD values. The reference values of each sphere were measured using NMR at 1.5T and 3.0T. The standardized concentration for relaxometry values established as references by NIST are also used by another company for their quantitative relaxometry MRI phantoms (Gold Standard Phantoms Ltd., Rochester, England). The cardiac TIMES phantom (Captur et al. 2016) is another commercially available system phantom used for T1, focusing on T1 and T2 values in blood and heart muscles, pre- and post-contrast. The ISMRM/NIST phantom has been used in a few large multicenter studies already, such as . (Bane et al. 2018) where they compared measurements at eight sites on a single phantom using the inversion recovery and VFA T1 mapping protocols recommended by NIST for their phantom, as well as some site-specific imaging protocols used for DCE. In another study led by NIST researchers (Keenan et al. 2021), T1 measurements were done at two clinical field strengths (1.5T and 3.0T) and 27 MRI systems (three vendors) using the recommended NIST protocols. That study found no significant relationship between T1 discrepancies of the measurements and the MRI vendors used.
+</p>
+<p style="text-align:justify;">
+The 2020 ISMRM reproducibility challenge posed the following question: <b>will an imaging protocol independently-implemented at multiple centers reliably measure what is considered one of the fundamental MR parameters (T1) using the most robust technique (inversion recovery) in a standardized phantom (ISMRM/NIST system phantom)</b>. The challenge aimed at assessing the variability in measurements due to different groups reproducing a protocol from a specific publication (Barral et al. 2010). As the focus of this challenge was on reproducibility, the challenge design emphasized the use of reproducible research practices, such as sharing code, pipelines, data, and scripts to reproduce figures. To be more inclusive and broaden participation, participants were also invited to data acquired on healthy subjects if they did not have access to the necessary ISMRM/NIST system phantom, provided that their local and institutional ethics protocols permitted it.
+</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
