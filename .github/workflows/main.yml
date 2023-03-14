@@ -30,7 +30,7 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build paper.ipynb
+        jupyter-book build source/paper.ipynb
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
