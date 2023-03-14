@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; 2020 T1 Reproducibility Challenge</title>
+    <title>2020 T1 Reproducibility Challenge</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -56,6 +56,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -126,52 +128,6 @@ title="Fullscreen mode"
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/paper.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
     </div>
 </div>
 
@@ -209,6 +165,276 @@ Efforts have been made to develop quantitative MRI phantoms to assist in standar
 <p style="text-align:justify;">
 The 2020 ISMRM reproducibility challenge posed the following question: <b>will an imaging protocol independently-implemented at multiple centers reliably measure what is considered one of the fundamental MR parameters (T1) using the most robust technique (inversion recovery) in a standardized phantom (ISMRM/NIST system phantom)</b>. The challenge aimed at assessing the variability in measurements due to different groups reproducing a protocol from a specific publication (Barral et al. 2010). As the focus of this challenge was on reproducibility, the challenge design emphasized the use of reproducible research practices, such as sharing code, pipelines, data, and scripts to reproduce figures. To be more inclusive and broaden participation, participants were also invited to data acquired on healthy subjects if they did not have access to the necessary ISMRM/NIST system phantom, provided that their local and institutional ethics protocols permitted it.
 </p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="materials">
+<h1>Materials<a class="headerlink" href="#materials" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+The challenge was launched for those with access to the International Society of Magnetic Resonance in Medicine/National Institute of Standards and Technology (ISMRM/NIST) system phantom (Stupic et al. 2021) (Premium System Phantom, CaliberMRI, Boulder, Colorado). Two versions of the phantom have been produced with slightly different quantitative parameters values in the liquid spheres. Phantoms with serial numbers 0041 or less are referred to as “Version 1”, and those 0042 or greater are “Version 2”. The phantom has three plates containing sets of 14 spheres for ranges of proton density (PD), T1 (NiCl2), and T2 (MnCl2) values. Reference T1 values at 20 °C and 3.0 T for the T1 plate are listed in Table 1 for both versions of the phantom. Participants were instructed to record the temperature before and after scanning the phantom using the phantom's internal thermometer. Instructions for positioning and setting up the phantom were provided to participants through the NIST website.
+</p>
+<b style="text-align:justify;">
+Table 1. Reference T1 values of the “T1 plate” of the standard phantom (for both phantom versions) measured at 20 °C and 3.0 T. Phantoms with serial numbers 0041 or less are referred to as “Version 1”, and those 0042 or greater are “Version 2”.
+</b>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Sphere #</p></th>
+<th class="text-align:center head"><p>Version 1 (ms)</p></th>
+<th class="text-align:center head"><p>Version 2  (ms)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>1</p></td>
+<td class="text-align:center"><p>1989 ± 1.0</p></td>
+<td class="text-align:center"><p>1883.97 ± 30.32</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>2</p></td>
+<td class="text-align:center"><p>1454 ± 2.5</p></td>
+<td class="text-align:center"><p>1330.16 ± 20.41</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>3</p></td>
+<td class="text-align:center"><p>984.1 ± 0.33</p></td>
+<td class="text-align:center"><p>987.27 ± 14.22</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>4</p></td>
+<td class="text-align:center"><p>706 ± 1.0</p></td>
+<td class="text-align:center"><p>690.08 ± 10.12</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>5</p></td>
+<td class="text-align:center"><p>496.7 ± 0.41</p></td>
+<td class="text-align:center"><p>484.97 ± 7.06</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>6</p></td>
+<td class="text-align:center"><p>351.5 ± 0.91</p></td>
+<td class="text-align:center"><p>341.58 ± 4.97</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>7</p></td>
+<td class="text-align:center"><p>247.13 ± 0.086</p></td>
+<td class="text-align:center"><p>240.86 ± 3.51</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>8</p></td>
+<td class="text-align:center"><p>175.3 ± 0.11</p></td>
+<td class="text-align:center"><p>174.95 ± 2.48</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>9</p></td>
+<td class="text-align:center"><p>125.9 ± 0.33</p></td>
+<td class="text-align:center"><p>121.08 ± 1.75</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>10</p></td>
+<td class="text-align:center"><p>89.0 ± 0.17</p></td>
+<td class="text-align:center"><p>85.75 ± 1.24</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>11</p></td>
+<td class="text-align:center"><p>62.7 ± 0.13</p></td>
+<td class="text-align:center"><p>60.21 ± 0.87</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>12</p></td>
+<td class="text-align:center"><p>44.53 ± 0.090</p></td>
+<td class="text-align:center"><p>42.89 ± 0.44</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>13</p></td>
+<td class="text-align:center"><p>30.84 ± 0.016</p></td>
+<td class="text-align:center"><p>30.40 ± 0.62</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>14</p></td>
+<td class="text-align:center"><p>21.719 ± 0.005</p></td>
+<td class="text-align:center"><p>21.44 ± 0.31</p></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align:justify;">
+Participants without access to the ISMRM/NIST phantom were encouraged to collect healthy human brain T1 maps following their institutional ethical guidelines and with participants' consent to participate in the challenge. To ensure consistency across datasets, single-slice positioning parallel to the AC-PC line was recommended. All submitted datasets and subsequent fitted T1 maps were to be uploaded to the data sharing website OSF.io, and thus participants were informed obtain consent for open-data sharing before scanning and to anonymize their data before submission. As the submitted single-slice inversion recovery images would be along the AC-PC line, they are unlikely to contain sufficient information facial identification, and therefore de-masking was not recommended. Participants who submitted human data for this challenge provided written confirmation to the organizers that their data for this challenge was in accordance with their institutional ethics committee (or equivalent regulatory body) and that the subjects had consented to sharing their data as described in the challenge.
+</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="protocol">
+<h1>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+Participants were instructed to acquire data for T1 mapping data using the spin-echo inversion recovery protocol for T1 mapping as reported in (Barral et al. 2010), as detailed in Table 2. This protocol uses four inversion times optimized for human brain T1 values and uses a relatively short TR (2550 ms). It’s important to note that this acquisition protocol is not suitable for T1 mapping fitting models that assume TR > 5T1. Instead, more general models of inversion recovery, such as the Barral et al. fitting model described in Section 2.4.1, can be used to fit this data.
+</p>
+<b style="text-align:justify;">
+Table 2. Imaging protocol for inversion recovery T1 mapping proposed  to the participants for the 2020 joint RRSG-qMRSG reproducibility challenge. The protocol is the brain imaging protocol used in (Barral et al. 2010), and which is meant for the T1 values observed in healthy human brains.
+</b>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Pulse Sequence</p></th>
+<th class="text-align:center head"><p>Spin-echo inversion recovery</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><strong>Repetition Time (TR)</strong></p></td>
+<td class="text-align:center"><p>2550 ms</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>Inversion Time (TI)</strong></p></td>
+<td class="text-align:center"><p>50, 400, 1100, 2500 ms</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>Echo Time (TE)</strong></p></td>
+<td class="text-align:center"><p>14 ms</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>In-plane resolution</strong></p></td>
+<td class="text-align:center"><p>1x1 mm<sup>2</sup></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>Slice thickness</strong></p></td>
+<td class="text-align:center"><p>2 mm</p></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align:justify;">
+Participants were advised to adhere to this protocol as closely as possible, but to report any differences in protocol parameters due to technical limitations of their scanners and/or software. The recommended data exportation type was complex (magnitude & phase, or real & imaginary), and magnitude-only data was also acceptable if complex data could not be exported.
+</p></section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-submissions">
+<h1>Data Submissions<a class="headerlink" href="#data-submissions" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+Data submissions for the challenge were managed through a dedicated repository on GitHub, accessible at https://github.com/rrsg2020/data_submission. This allowed transparent and open review of the submissions, as well as better standardization of the process. All datasets had to be converted to the NIfTI file format, and images from different TIs needed to be concatenated into the fourth (or “time”) dimension. Magnitude-only datasets required one NIfTI file, while complex datasets required two files (magnitude and phase, or real and imaginary). Additionally, a configuration file containing submission, dataset, and acquisition details (such as data type, submitter name and email, site details, phantom or volunteer details, and imaging protocol details) was required for each submitted dataset to ensure that the information was standardized and easily found. Each submission was reviewed to confirm that guidelines were followed, and then datasets and configuration files were uploaded to OSF.io. A Jupyter Notebook  (Kluyver et al. 2016; Beg et al. 2021) pipeline was used to generate T1 maps at this stage also for quality assurance. Links to the Jupyter Notebook for reproducing the T1 map were shared for each submission using the MyBinder platform, ensuring that computation environments were reproducible without the need for installation of software packages on peoples local computers.
+</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fitting-model-and-pipeline">
+<h1>Fitting Model and Pipeline<a class="headerlink" href="#fitting-model-and-pipeline" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+A reduced-dimension non-linear least squares (RD-NLS) approach was used to fit the complex general inversion recovery signal equation: 
+</p>
+<div class="math notranslate nohighlight" id="equation-my-label">
+<span class="eqno">(1)<a class="headerlink" href="#equation-my-label" title="Permalink to this equation">#</a></span>\[S(TI) = a + be^{-TI/T_1}\]</div>
+<p style="text-align:justify;">
+where a and b are complex constants. This approach, introduced in (Barral et al. 2010), models the general T1 signal equation without approximating for a very long TR. The a and b constants inherently factor TR in them. Barral et al. shared the implementation of their fitting algorithm used in their paper. To facilitate its use in our pipelines, we used a wrapper around this code available in the open-source software qMRLab (Cabana et al. 2015; Karakuzu et al. 2020), which provides a standardized API to call the fitting in MATLAB/Octave scripts.
+</p>
+<p style="text-align:justify;">
+A Jupyter Notebook data processing pipeline was written using MATLAB/Octave. This pipeline automatically downloads all the datasets, loads each dataset configuration file, fits the T1 data voxel-wise, and exports the resulting T1 map to the NIfTI and PNG formats for quality assurance. This pipeline is available in a GitHub repository (https://github.com/rrsg2020/t1_fitting_pipeline, filename: RRSG_T1_fitting.ipynb). Once all submissions were collected and the pipeline was executed, the T1 maps were uploaded to OSF.io.
+</p></section>
+<section class="tex2jax_ignore mathjax_ignore" id="image-labeling-registration">
+<h1>Image Labeling &amp; Registration<a class="headerlink" href="#image-labeling-registration" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+The  T1 plate of the phantom had 14 spheres that were labeled as the regions-of-interest (ROI) using a numerical mask template created in MATLAB, provided by NIST researchers (Figure 1–a).  To avoid potential edge effects in the T1 maps, the ROI labels were reduced to 60% of the expected sphere diameter. A registration pipeline in Python using the Advanced Normalization Tools (ANTs) (Avants, Tustison, and Song 2009) was developed and shared in the “analysis” repository of our GitHub organization (https://github.com/rrsg2020/analysis, filename: register_t1maps_nist.py). The ROI labels template was nonlinearly registered to each submitted dataset’s T1 map uploaded to OSF.io.
+</p>
+<b style="text-align:justify;">
+Figure 1. ROI selection for the NIST phantom (a) and the human brain (b). a) The 14 ROIs (shades of blue/green) were automatically generated using a script provided by NIST. In yellow are the three reference pins in the phantom, and are not ROIs or spheres. b) ROIs were manually segmented in the human brains in four regions: the genu (yellow, 5x5 voxels), splenium (green, 5x5 voxels), deep gray matter (blue, 5x5 voxels), and cortical gray matter (red, three sets of 3x3 voxels). Note: due to differences in slice positioning from the single-slice datasets provided by certain sites, for some datasets it was not possible to manually segment an ROI in the genu or deep gray matter. In the case of the missing genu, left or right frontal white matter was selected; for deep grey matter, it was omitted entirely for those cases.
+</b>
+<a class="reference internal image-reference" href="_images/fig1.png" id="fig1"><img alt="_images/fig1.png" class="align-center" id="fig1" src="_images/fig1.png" style="width: 500px;" /></a>
+<p style="text-align:justify;">
+Manual ROIs were manually segmented using FSLeyes (McCarthy 2019) in four regions for human datasets (Figure 1-b): genu, splenium, deep gray matter, and cortical gray matter. Automatic segmentation was not used because the data was single-slice and there was inconsistent slice positioning between datasets.
+</p></section>
+<section class="tex2jax_ignore mathjax_ignore" id="analysis-and-statistics">
+<h1>Analysis and Statistics<a class="headerlink" href="#analysis-and-statistics" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+Analysis code and scripts were developed and shared in a version-tracked public GitHub repository. Python-based Jupyter Notebooks were used for both the quality assurance and main analysis workflows. The computational environment requirements were containerized in Docker Docker (Merkel 2014; Boettiger 2015), allowing for an executable environment that can  reproduce the analysis in a web browser through MyBinder (Project Jupyter et al. 2018).  Backend Python files handled reference data, database handling, ROI masking, and general analysis tools, while configuration files managed the dataset information which were downloaded and pooled using a script (make_pooled_datasets.py). The databases were created using a reproducible Jupyter Notebook script and subsequently saved in the repository.
+</p>
+<p style="text-align:justify;">
+For the NIST phantom data, mean T1 values for each ROI were compared with temperature-corrected reference values and visualized in three different types of plots (linear axes, log-log axes, and error relative to the reference value). This comparison was repeated for individual measurements at each site and for all measurements grouped together. Temperature correction was carried out via interpolation of the set of reference NIST T1 values between 16 °C and 26 °C (2 °C intervals), listed in the phantom technical specifications. For the human datasets, a notebook was created to plot the mean and standard deviations for each tissue ROI from all submissions from all sites. All the quality assurance and analysis plot images were saved to the repository for ease-of-access and a timestamped version-controlled record of the state of the analysis figures. The database files of ROI values and acquisition details for all submissions were also saved to the repository.
+</p>
+<p style="text-align:justify;">
+An interactive dashboard was developed in Dash by Plotly (Plotly Technologies Inc. 2015) and hosted by NeuroLibre (Karakuzu et al. 2022) to provide an interactive approach for exploring the data, analysis, and statistics of the challenge results. The dashboard visualizes the mean, median, standard deviation, and coefficient of variations for each phantom sphere and brain ROI. The data was collected from the pre-prepared databases of masked ROI values and incorporated other database information, such as phantom version, temperature, MRI manufacturer, and reference values. The interactive dashboard displays these results for all measurements at all sites.
+</p></section>
+<section class="tex2jax_ignore mathjax_ignore" id="submissions">
+<h1>Submissions<a class="headerlink" href="#submissions" title="Permalink to this headline">#</a></h1>
+<p style="text-align:justify;">
+Nineteen participants submitted data that were approved, which included 41 T1 maps of the NIST/system phantom, and 56 brain T1 maps. It should be noted that these numbers include a subset of measurements where both complex and magnitude-only data from the same acquisition were used to fit T1 maps, thus the total number of unique acquisitions is lower than the numbers reported above. The datasets were collected on three MRI manufacturers (Siemens, GE, Philips) and were acquired at 3.0 T, except for one dataset acquired at 350 mT. To showcase the heterogeneity of the independently-implemented submissions, Figure 2 displays six T1 maps of the phantoms submitted to the challenge.
+</p>
+<p style="text-align:justify;">
+Of these datasets, several submissions went beyond the minimum acquisition and acquired additional datasets using the NIST phantom, such as a traveling phantom (7 scanners), scan-rescan , same-day rescans on two MRIs, short TR vs long TR, and 4 point TI vs 14 point TI. For humans, one site acquired 13 subjects on three scanners (two manufacturers), one site acquired 6 subjects , and one site acquired a subject using two different head coils (20 channels vs. 64 channels).
+</p>
+<b style="text-align:justify;">
+Figure 2. Example T1 maps that were submitted. Note the differences in acquisitions (e.g. FOV (top middle), orientation (bottom right, k-space pattern (top left and right) and resulting artifacts in the T1 maps (e.g. ghosting (bottom left), ringing (bottom middle), noise profiles (top left and bottom right), deformation/slice mispositioning (top right)) resulting from the independently-implemented acquisition protocols.
+</b><div class="cell tag_hide_input tag_remove_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;analysis&#39;</span><span class="p">)</span><span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rrsg2020/analysis.git
+    <span class="n">dir_name</span> <span class="o">=</span> <span class="s1">&#39;analysis&#39;</span>
+    <span class="n">analysis</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.ipynb&quot;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.md&quot;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
+<span class="c1"># Imports</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Video</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">analysis.src.plots</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">analysis.make_pooled_datasets</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Configurations</span>
+<span class="n">configFile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;analysis/configs/3T_NIST_T1maps.json&#39;</span><span class="p">)</span>
+<span class="n">data_folder_name</span> <span class="o">=</span> <span class="s1">&#39;analysis/3T_NIST_T1maps&#39;</span>
+<span class="n">output_gif_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;analysis/plots/01-wholedataset_gif_NIST/&quot;</span><span class="p">)</span>
+<span class="n">output_gif_name</span> <span class="o">=</span> <span class="s1">&#39;NIST.gif&#39;</span>
+
+<span class="c1"># Download datasets</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_folder_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">make_pooled_dataset</span><span class="p">(</span><span class="n">configFile</span><span class="p">,</span> <span class="n">data_folder_name</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">configFile</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">configJson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">key2</span><span class="p">):</span>
+    <span class="c1"># Load T1 image data</span>
+    <span class="n">t1_file</span> <span class="o">=</span> <span class="n">configJson</span><span class="p">[</span><span class="n">dataset_name</span><span class="p">][</span><span class="s1">&#39;datasets&#39;</span><span class="p">][</span><span class="n">key2</span><span class="p">][</span><span class="s1">&#39;imagePath&#39;</span><span class="p">]</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">data_folder_name</span><span class="p">)</span> <span class="o">/</span> <span class="n">t1_file</span><span class="p">)</span>
+    <span class="n">t1_volume</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span> 
+
+    <span class="c1"># Handle 2D vs 3D volume case</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="n">t1_volume</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">t1_volume</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">index_smallest_dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
+        <span class="n">numberOfSlices</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="n">index_smallest_dim</span><span class="p">]</span>
+        <span class="n">midSlice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">numberOfSlices</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">index_smallest_dim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">t1_volume</span><span class="p">[</span><span class="n">midSlice</span><span class="p">,:,:]))</span>
+        <span class="k">elif</span> <span class="n">index_smallest_dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">t1_volume</span><span class="p">[:,</span><span class="n">midSlice</span><span class="p">,:]))</span>
+        <span class="k">elif</span> <span class="n">index_smallest_dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">t1_volume</span><span class="p">[:,:,</span><span class="n">midSlice</span><span class="p">]))</span>
+
+    <span class="n">xAxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">yAxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">im</span><span class="p">,</span> <span class="n">xAxis</span><span class="p">,</span> <span class="n">yAxis</span>
+
+
+<span class="n">im_1</span><span class="p">,</span> <span class="n">xAxis_1</span><span class="p">,</span> <span class="n">yAxis_1</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;wang_MDAnderson_NIST&#39;</span><span class="p">,</span> <span class="s1">&#39;day2_mag&#39;</span><span class="p">)</span>
+
+<span class="n">im_2</span><span class="p">,</span> <span class="n">xAxis_2</span><span class="p">,</span> <span class="n">yAxis_2</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;CStehningPhilipsClinicalScienceGermany_NIST&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonn_MR1_magnitude&#39;</span><span class="p">)</span>
+
+<span class="n">im_3</span><span class="p">,</span> <span class="n">xAxis_3</span><span class="p">,</span> <span class="n">yAxis_3</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;mrel_usc_NIST&#39;</span><span class="p">,</span> <span class="s1">&#39;Session1_MR1&#39;</span><span class="p">)</span>
+
+<span class="n">im_4</span><span class="p">,</span> <span class="n">xAxis_4</span><span class="p">,</span> <span class="n">yAxis_4</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;karakuzu_polymtl_NIST&#39;</span><span class="p">,</span> <span class="s1">&#39;mni&#39;</span><span class="p">)</span>
+
+<span class="n">im_5</span><span class="p">,</span> <span class="n">xAxis_5</span><span class="p">,</span> <span class="n">yAxis_5</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;madelinecarr_lha_NIST&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">)</span>
+
+<span class="n">im_6</span><span class="p">,</span> <span class="n">xAxis_6</span><span class="p">,</span> <span class="n">yAxis_6</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;matthewgrechsollars_ICL_NIST&#39;</span><span class="p">,</span> <span class="s1">&#39;magnitude&#39;</span><span class="p">)</span>
+<span class="n">im_6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">im_6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_report_output tag_remove_input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-2.18.2.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script>
+</div><div class="output text_html">figure2.html</div></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
