@@ -1,0 +1,302 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from os import path
+import os
+
+if path.isdir('analysis')== False:
+    !git clone https://github.com/rrsg2020/analysis.git
+    dir_name = 'analysis'
+    analysis = os.listdir(dir_name)
+
+    for item in analysis:
+        if item.endswith(".ipynb"):
+            os.remove(os.path.join(dir_name, item))
+        if item.endswith(".md"):
+            os.remove(os.path.join(dir_name, item))
+
+# Imports
+
+from pathlib import Path
+import pandas as pd
+import json
+import nibabel as nib
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import Video
+import glob
+from analysis.src.plots import *
+from analysis.make_pooled_datasets import *
+
+# Configurations
+configFile = Path('analysis/configs/3T_NIST_T1maps.json')
+data_folder_name = 'analysis/3T_NIST_T1maps'
+
+configFile_raw = Path('analysis/configs/3T_NIST.json')
+data_folder_name_raw = 'analysis/3T_NIST'
+
+# Download datasets
+if not Path(data_folder_name).exists():
+    make_pooled_dataset(configFile, data_folder_name)
+
+if not Path(data_folder_name_raw).exists():
+    make_pooled_dataset(configFile_raw, data_folder_name_raw)
+
+with open(configFile) as json_file:
+    configJson = json.load(json_file)
+
+with open(configFile_raw) as json_file:
+    configJson_raw = json.load(json_file)
+    
+def get_image(dataset_name, key2):
+    # Load T1 image data
+    t1_file = configJson[dataset_name]['datasets'][key2]['imagePath']
+    t1 = nib.load(Path(data_folder_name) / t1_file)
+    t1_volume = t1.get_fdata() 
+
+    # Load raw image data
+    raw_file = configJson_raw[dataset_name]['datasets'][key2]['imagePath']
+    raw = nib.load(Path(data_folder_name_raw) / raw_file)
+    raw_volume = raw.get_fdata() 
+
+    # Handle 2D vs 3D volume case
+    dims = t1_volume.shape
+    if (len(dims) == 2) or (np.min(dims) == 1):
+        im = np.rot90(t1_volume)
+        TI_1 = np.rot90(np.squeeze(raw_volume[:,:,0,0]))
+        TI_2 = np.rot90(np.squeeze(raw_volume[:,:,0,1]))
+        TI_3 = np.rot90(np.squeeze(raw_volume[:,:,0,2]))
+        TI_4 = np.rot90(np.squeeze(raw_volume[:,:,0,3]))    
+    else:
+        index_smallest_dim = np.argmin(dims)
+        numberOfSlices = dims[index_smallest_dim]
+        midSlice = int(np.round(numberOfSlices/2))
+
+        if index_smallest_dim == 0:
+            im = np.rot90(np.squeeze(t1_volume[midSlice,:,:]))
+            TI_1 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,0]))
+            TI_2 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,1]))
+            TI_3 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,2]))
+            TI_4 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,3]))    
+        elif index_smallest_dim == 1:
+            im = np.rot90(np.squeeze(t1_volume[:,midSlice,:]))
+            TI_1 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,0]))
+            TI_2 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,1]))
+            TI_3 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,2]))
+            TI_4 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,3]))
+        elif index_smallest_dim == 2:
+            im = np.rot90(np.squeeze(t1_volume[:,:,midSlice]))
+            TI_1 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,0]))
+            TI_2 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,1]))
+            TI_3 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,2]))
+            TI_4 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,3]))
+
+    xAxis = np.linspace(0,im.shape[0]-1, num=im.shape[0])
+    yAxis = np.linspace(0,im.shape[1]-1, num=im.shape[1])
+    return im, xAxis, yAxis, TI_1, TI_2, TI_3, TI_4
+
+
+im_1, xAxis_1, yAxis_1, TI_1_1, TI_2_1, TI_3_1, TI_4_1 = get_image('wang_MDAnderson_NIST', 'day2_mag')
+
+im_2, xAxis_2, yAxis_2, TI_1_2, TI_2_2, TI_3_2, TI_4_2 = get_image('CStehningPhilipsClinicalScienceGermany_NIST', 'Bonn_MR1_magnitude')
+
+im_3, xAxis_3, yAxis_3, TI_1_3, TI_2_3, TI_3_3, TI_4_3 = get_image('mrel_usc_NIST', 'Session1_MR1')
+
+im_4, xAxis_4, yAxis_4, TI_1_4, TI_2_4, TI_3_4, TI_4_4 = get_image('karakuzu_polymtl_NIST', 'mni')
+
+im_5, xAxis_5, yAxis_5, TI_1_5, TI_2_5, TI_3_5, TI_4_5 = get_image('madelinecarr_lha_NIST', 'one')
+
+im_6, xAxis_6, yAxis_6, TI_1_6, TI_2_6, TI_3_6, TI_4_6 = get_image('matthewgrechsollars_ICL_NIST', 'magnitude')
+im_6 = np.flipud(im_6)
+TI_1_6 = np.flipud(TI_1_6)
+TI_2_6 = np.flipud(TI_2_6)
+TI_3_6 = np.flipud(TI_3_6)
+TI_4_6 = np.flipud(TI_4_6)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTimeoutError[0m                              Traceback (most recent call last)
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:1354[0m, in [0;36mAbstractHTTPHandler.do_open[0;34m(self, http_class, req, **http_conn_args)[0m
+[1;32m   1353[0m [38;5;28;01mtry[39;00m:
+[0;32m-> 1354[0m     [43mh[49m[38;5;241;43m.[39;49m[43mrequest[49m[43m([49m[43mreq[49m[38;5;241;43m.[39;49m[43mget_method[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mreq[49m[38;5;241;43m.[39;49m[43mselector[49m[43m,[49m[43m [49m[43mreq[49m[38;5;241;43m.[39;49m[43mdata[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m
+[1;32m   1355[0m [43m              [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mreq[49m[38;5;241;43m.[39;49m[43mhas_header[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mTransfer-encoding[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m)[49m
+[1;32m   1356[0m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:1256[0m, in [0;36mHTTPConnection.request[0;34m(self, method, url, body, headers, encode_chunked)[0m
+[1;32m   1255[0m [38;5;250m[39m[38;5;124;03m"""Send a complete request to the server."""[39;00m
+[0;32m-> 1256[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_send_request[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mbody[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m[43m [49m[43mencode_chunked[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:1302[0m, in [0;36mHTTPConnection._send_request[0;34m(self, method, url, body, headers, encode_chunked)[0m
+[1;32m   1301[0m     body [38;5;241m=[39m _encode(body, [38;5;124m'[39m[38;5;124mbody[39m[38;5;124m'[39m)
+[0;32m-> 1302[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mendheaders[49m[43m([49m[43mbody[49m[43m,[49m[43m [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mencode_chunked[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:1251[0m, in [0;36mHTTPConnection.endheaders[0;34m(self, message_body, encode_chunked)[0m
+[1;32m   1250[0m     [38;5;28;01mraise[39;00m CannotSendHeader()
+[0;32m-> 1251[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_send_output[49m[43m([49m[43mmessage_body[49m[43m,[49m[43m [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mencode_chunked[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:1011[0m, in [0;36mHTTPConnection._send_output[0;34m(self, message_body, encode_chunked)[0m
+[1;32m   1010[0m [38;5;28;01mdel[39;00m [38;5;28mself[39m[38;5;241m.[39m_buffer[:]
+[0;32m-> 1011[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msend[49m[43m([49m[43mmsg[49m[43m)[49m
+[1;32m   1013[0m [38;5;28;01mif[39;00m message_body [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m   1014[0m 
+[1;32m   1015[0m     [38;5;66;03m# create a consistent interface to message_body[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:951[0m, in [0;36mHTTPConnection.send[0;34m(self, data)[0m
+[1;32m    950[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mauto_open:
+[0;32m--> 951[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
+[1;32m    952[0m [38;5;28;01melse[39;00m:
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:1418[0m, in [0;36mHTTPSConnection.connect[0;34m(self)[0m
+[1;32m   1416[0m [38;5;124m"[39m[38;5;124mConnect to a host on a given (SSL) port.[39m[38;5;124m"[39m
+[0;32m-> 1418[0m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
+[1;32m   1420[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_tunnel_host:
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/http/client.py:922[0m, in [0;36mHTTPConnection.connect[0;34m(self)[0m
+[1;32m    921[0m [38;5;250m[39m[38;5;124;03m"""Connect to the host and port specified in __init__."""[39;00m
+[0;32m--> 922[0m [38;5;28mself[39m[38;5;241m.[39msock [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_create_connection[49m[43m([49m
+[1;32m    923[0m [43m    [49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhost[49m[43m,[49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mport[49m[43m)[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mtimeout[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msource_address[49m[43m)[49m
+[1;32m    924[0m [38;5;28mself[39m[38;5;241m.[39msock[38;5;241m.[39msetsockopt(socket[38;5;241m.[39mIPPROTO_TCP, socket[38;5;241m.[39mTCP_NODELAY, [38;5;241m1[39m)
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/socket.py:808[0m, in [0;36mcreate_connection[0;34m(address, timeout, source_address)[0m
+[1;32m    807[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 808[0m     [38;5;28;01mraise[39;00m err
+[1;32m    809[0m [38;5;28;01mfinally[39;00m:
+[1;32m    810[0m     [38;5;66;03m# Break explicitly a reference cycle[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/socket.py:796[0m, in [0;36mcreate_connection[0;34m(address, timeout, source_address)[0m
+[1;32m    795[0m     sock[38;5;241m.[39mbind(source_address)
+[0;32m--> 796[0m [43msock[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43msa[49m[43m)[49m
+[1;32m    797[0m [38;5;66;03m# Break explicitly a reference cycle[39;00m
+
+[0;31mTimeoutError[0m: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+[0;31mURLError[0m                                  Traceback (most recent call last)
+Cell [0;32mIn[1], line 38[0m
+[1;32m     36[0m [38;5;66;03m# Download datasets[39;00m
+[1;32m     37[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m Path(data_folder_name)[38;5;241m.[39mexists():
+[0;32m---> 38[0m     [43mmake_pooled_dataset[49m[43m([49m[43mconfigFile[49m[43m,[49m[43m [49m[43mdata_folder_name[49m[43m)[49m
+[1;32m     40[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m Path(data_folder_name_raw)[38;5;241m.[39mexists():
+[1;32m     41[0m     make_pooled_dataset(configFile_raw, data_folder_name_raw)
+
+File [0;32m~/work/paper/paper/source/analysis/make_pooled_datasets.py:29[0m, in [0;36mmake_pooled_dataset[0;34m(configFilename, outputFolder)[0m
+[1;32m     27[0m [38;5;28;01mfor[39;00m submitter [38;5;129;01min[39;00m data[38;5;241m.[39mkeys():
+[1;32m     28[0m     [38;5;28mprint[39m(data[submitter][[38;5;124m'[39m[38;5;124mOSF_link[39m[38;5;124m'[39m])
+[0;32m---> 29[0m     [43mwget[49m[38;5;241;43m.[39;49m[43mdownload[49m[43m([49m[43mdata[49m[43m[[49m[43msubmitter[49m[43m][49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mOSF_link[39;49m[38;5;124;43m'[39;49m[43m][49m[43m)[49m
+[1;32m     31[0m     [38;5;28;01mfor[39;00m filename [38;5;129;01min[39;00m os[38;5;241m.[39mlistdir([38;5;28mstr[39m(Path(os[38;5;241m.[39mgetcwd()))):
+[1;32m     32[0m         [38;5;28;01mif[39;00m filename[38;5;241m.[39mendswith([38;5;124m"[39m[38;5;124m.zip[39m[38;5;124m"[39m):
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/wget.py:526[0m, in [0;36mdownload[0;34m(url, out, bar)[0m
+[1;32m    524[0m [38;5;28;01melse[39;00m:
+[1;32m    525[0m     binurl [38;5;241m=[39m url
+[0;32m--> 526[0m (tmpfile, headers) [38;5;241m=[39m [43mulib[49m[38;5;241;43m.[39;49m[43murlretrieve[49m[43m([49m[43mbinurl[49m[43m,[49m[43m [49m[43mtmpfile[49m[43m,[49m[43m [49m[43mcallback[49m[43m)[49m
+[1;32m    527[0m filename [38;5;241m=[39m detect_filename(url, out, headers)
+[1;32m    528[0m [38;5;28;01mif[39;00m outdir:
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:247[0m, in [0;36murlretrieve[0;34m(url, filename, reporthook, data)[0m
+[1;32m    230[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
+[1;32m    231[0m [38;5;124;03mRetrieve a URL into a temporary location on disk.[39;00m
+[1;32m    232[0m 
+[0;32m   (...)[0m
+[1;32m    243[0m [38;5;124;03mdata file as well as the resulting HTTPMessage object.[39;00m
+[1;32m    244[0m [38;5;124;03m"""[39;00m
+[1;32m    245[0m url_type, path [38;5;241m=[39m _splittype(url)
+[0;32m--> 247[0m [38;5;28;01mwith[39;00m contextlib[38;5;241m.[39mclosing([43murlopen[49m[43m([49m[43murl[49m[43m,[49m[43m [49m[43mdata[49m[43m)[49m) [38;5;28;01mas[39;00m fp:
+[1;32m    248[0m     headers [38;5;241m=[39m fp[38;5;241m.[39minfo()
+[1;32m    250[0m     [38;5;66;03m# Just return the local path and the "headers" for file://[39;00m
+[1;32m    251[0m     [38;5;66;03m# URLs. No sense in performing a copy unless requested.[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:222[0m, in [0;36murlopen[0;34m(url, data, timeout, cafile, capath, cadefault, context)[0m
+[1;32m    220[0m [38;5;28;01melse[39;00m:
+[1;32m    221[0m     opener [38;5;241m=[39m _opener
+[0;32m--> 222[0m [38;5;28;01mreturn[39;00m [43mopener[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m,[49m[43m [49m[43mdata[49m[43m,[49m[43m [49m[43mtimeout[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:531[0m, in [0;36mOpenerDirector.open[0;34m(self, fullurl, data, timeout)[0m
+[1;32m    529[0m [38;5;28;01mfor[39;00m processor [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mprocess_response[38;5;241m.[39mget(protocol, []):
+[1;32m    530[0m     meth [38;5;241m=[39m [38;5;28mgetattr[39m(processor, meth_name)
+[0;32m--> 531[0m     response [38;5;241m=[39m [43mmeth[49m[43m([49m[43mreq[49m[43m,[49m[43m [49m[43mresponse[49m[43m)[49m
+[1;32m    533[0m [38;5;28;01mreturn[39;00m response
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:640[0m, in [0;36mHTTPErrorProcessor.http_response[0;34m(self, request, response)[0m
+[1;32m    637[0m [38;5;66;03m# According to RFC 2616, "2xx" code indicates that the client's[39;00m
+[1;32m    638[0m [38;5;66;03m# request was successfully received, understood, and accepted.[39;00m
+[1;32m    639[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m ([38;5;241m200[39m [38;5;241m<[39m[38;5;241m=[39m code [38;5;241m<[39m [38;5;241m300[39m):
+[0;32m--> 640[0m     response [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mparent[49m[38;5;241;43m.[39;49m[43merror[49m[43m([49m
+[1;32m    641[0m [43m        [49m[38;5;124;43m'[39;49m[38;5;124;43mhttp[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mrequest[49m[43m,[49m[43m [49m[43mresponse[49m[43m,[49m[43m [49m[43mcode[49m[43m,[49m[43m [49m[43mmsg[49m[43m,[49m[43m [49m[43mhdrs[49m[43m)[49m
+[1;32m    643[0m [38;5;28;01mreturn[39;00m response
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:563[0m, in [0;36mOpenerDirector.error[0;34m(self, proto, *args)[0m
+[1;32m    561[0m     http_err [38;5;241m=[39m [38;5;241m0[39m
+[1;32m    562[0m args [38;5;241m=[39m ([38;5;28mdict[39m, proto, meth_name) [38;5;241m+[39m args
+[0;32m--> 563[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_call_chain[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m)[49m
+[1;32m    564[0m [38;5;28;01mif[39;00m result:
+[1;32m    565[0m     [38;5;28;01mreturn[39;00m result
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:502[0m, in [0;36mOpenerDirector._call_chain[0;34m(self, chain, kind, meth_name, *args)[0m
+[1;32m    500[0m [38;5;28;01mfor[39;00m handler [38;5;129;01min[39;00m handlers:
+[1;32m    501[0m     func [38;5;241m=[39m [38;5;28mgetattr[39m(handler, meth_name)
+[0;32m--> 502[0m     result [38;5;241m=[39m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m)[49m
+[1;32m    503[0m     [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m    504[0m         [38;5;28;01mreturn[39;00m result
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:755[0m, in [0;36mHTTPRedirectHandler.http_error_302[0;34m(self, req, fp, code, msg, headers)[0m
+[1;32m    752[0m fp[38;5;241m.[39mread()
+[1;32m    753[0m fp[38;5;241m.[39mclose()
+[0;32m--> 755[0m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mparent[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43mnew[49m[43m,[49m[43m [49m[43mtimeout[49m[38;5;241;43m=[39;49m[43mreq[49m[38;5;241;43m.[39;49m[43mtimeout[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:525[0m, in [0;36mOpenerDirector.open[0;34m(self, fullurl, data, timeout)[0m
+[1;32m    522[0m     req [38;5;241m=[39m meth(req)
+[1;32m    524[0m sys[38;5;241m.[39maudit([38;5;124m'[39m[38;5;124murllib.Request[39m[38;5;124m'[39m, req[38;5;241m.[39mfull_url, req[38;5;241m.[39mdata, req[38;5;241m.[39mheaders, req[38;5;241m.[39mget_method())
+[0;32m--> 525[0m response [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_open[49m[43m([49m[43mreq[49m[43m,[49m[43m [49m[43mdata[49m[43m)[49m
+[1;32m    527[0m [38;5;66;03m# post-process response[39;00m
+[1;32m    528[0m meth_name [38;5;241m=[39m protocol[38;5;241m+[39m[38;5;124m"[39m[38;5;124m_response[39m[38;5;124m"[39m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:542[0m, in [0;36mOpenerDirector._open[0;34m(self, req, data)[0m
+[1;32m    539[0m     [38;5;28;01mreturn[39;00m result
+[1;32m    541[0m protocol [38;5;241m=[39m req[38;5;241m.[39mtype
+[0;32m--> 542[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_call_chain[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhandle_open[49m[43m,[49m[43m [49m[43mprotocol[49m[43m,[49m[43m [49m[43mprotocol[49m[43m [49m[38;5;241;43m+[39;49m
+[1;32m    543[0m [43m                          [49m[38;5;124;43m'[39;49m[38;5;124;43m_open[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mreq[49m[43m)[49m
+[1;32m    544[0m [38;5;28;01mif[39;00m result:
+[1;32m    545[0m     [38;5;28;01mreturn[39;00m result
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:502[0m, in [0;36mOpenerDirector._call_chain[0;34m(self, chain, kind, meth_name, *args)[0m
+[1;32m    500[0m [38;5;28;01mfor[39;00m handler [38;5;129;01min[39;00m handlers:
+[1;32m    501[0m     func [38;5;241m=[39m [38;5;28mgetattr[39m(handler, meth_name)
+[0;32m--> 502[0m     result [38;5;241m=[39m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m)[49m
+[1;32m    503[0m     [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m    504[0m         [38;5;28;01mreturn[39;00m result
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:1397[0m, in [0;36mHTTPSHandler.https_open[0;34m(self, req)[0m
+[1;32m   1396[0m [38;5;28;01mdef[39;00m [38;5;21mhttps_open[39m([38;5;28mself[39m, req):
+[0;32m-> 1397[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdo_open[49m[43m([49m[43mhttp[49m[38;5;241;43m.[39;49m[43mclient[49m[38;5;241;43m.[39;49m[43mHTTPSConnection[49m[43m,[49m[43m [49m[43mreq[49m[43m,[49m
+[1;32m   1398[0m [43m        [49m[43mcontext[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_context[49m[43m,[49m[43m [49m[43mcheck_hostname[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_check_hostname[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/urllib/request.py:1357[0m, in [0;36mAbstractHTTPHandler.do_open[0;34m(self, http_class, req, **http_conn_args)[0m
+[1;32m   1354[0m         h[38;5;241m.[39mrequest(req[38;5;241m.[39mget_method(), req[38;5;241m.[39mselector, req[38;5;241m.[39mdata, headers,
+[1;32m   1355[0m                   encode_chunked[38;5;241m=[39mreq[38;5;241m.[39mhas_header([38;5;124m'[39m[38;5;124mTransfer-encoding[39m[38;5;124m'[39m))
+[1;32m   1356[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+[0;32m-> 1357[0m         [38;5;28;01mraise[39;00m URLError(err)
+[1;32m   1358[0m     r [38;5;241m=[39m h[38;5;241m.[39mgetresponse()
+[1;32m   1359[0m [38;5;28;01mexcept[39;00m:
+
+[0;31mURLError[0m: <urlopen error [Errno 110] Connection timed out>
+URLError: <urlopen error [Errno 110] Connection timed out>
+
