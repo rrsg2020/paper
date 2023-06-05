@@ -217,29 +217,23 @@ aas-journal: Astrophysical Journal <- The name of the AAS journal.
 
 # Summary
 
-We present the results of the ISMRM 2020 joint Reproducible Research and Quantitative MR study groups reproducibility challenge on T<sub>1</sub> mapping in phantom and human brain. T<sub>1</sub> mapping, a widely used quantitative MRI technique, exhibits inconsistent tissue-specific values across protocols, sites, and vendors. The challenge aimed to assess the reliability of an independently-implemented image acquisition protocol using inversion recovery in a standardized phantom and healthy human brains. Participants acquired T1 mapping data from MRIs of three manufacturers at 3T, resulting in 38 phantom datasets and 56 datasets from healthy human subjects. The robust imaging protocol and fitting algorithm demonstrated good reproducibility in both phantom and human brain T<sub>1</sub> measurements. However, variations in implementation led to higher variance in reported values compared to intra-submission variability. This challenge resulted in the creation of a comprehensive open database of T<sub>1</sub> mapping acquisitions, accessible at osf.io/ywc9g/, and an interactive dashboard at https://rrsg2020.dashboards.neurolibre.org for wider community access and engagement.
+We present the results of the ISMRM 2020 joint Reproducible Research and Quantitative MR study groups reproducibility challenge on T<sub>1</sub> mapping in phantom and human brain. T<sub>1</sub> mapping, a widely used quantitative MRI technique, exhibits inconsistent tissue-specific values across protocols, sites, and vendors. The challenge aimed to assess the reliability of an independently-implemented image acquisition protocol using inversion recovery in a standardized phantom and healthy human brains. Participants acquired T<sub>1</sub> mapping data from MRIs of three manufacturers at 3T, resulting in 38 phantom datasets and 56 datasets from healthy human subjects. The robust imaging protocol and fitting algorithm demonstrated good reproducibility in both phantom and human brain T<sub>1</sub> measurements. However, variations in implementation led to higher variance in reported values compared to intra-submission variability. This challenge resulted in the creation of a comprehensive open database of T<sub>1</sub> mapping acquisitions, accessible at osf.io/ywc9g/, and an interactive dashboard at https://rrsg2020.dashboards.neurolibre.org for wider community access and engagement.
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+T<sub>1</sub> mapping is a widely used quantitative MRI technique that provides valuable information about tissue properties. However, the field faces a significant challenge due to the inconsistency of tissue-specific T<sub>1</sub> values across different imaging protocols, sites, and vendors. This inconsistency hampers the comparability and reliability of T<sub>1</sub> measurements, limiting their utility in both research and clinical applications. To address this critical issue, the ISMRM Reproducible Research study group (RRSG) and Quantitative MR study group (qMRSG) collaborated to launch the T<sub>1</sub> mapping reproducibility challenge.
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
+The primary objective of the challenge was to investigate whether independently-implemented image acquisition protocols at multiple centers could reliably measure T<sub>1</sub> using inversion recovery in a standardized phantom and in the brains of healthy volunteers. By evaluating the reproducibility of a well-established T<sub>1</sub> mapping protocol and fitting algorithm from a reputable publication (Barral et al., 2010), the challenge aimed to identify sources of variability and establish best practices for achieving consistent and accurate T<sub>1</sub> measurements.
+
+A diverse group of participants was invited to acquire T<sub>1</sub> mapping data on a standard ISMRM/NIST phantom and/or in healthy human brains using MRI scanners from three different manufacturers (Siemens, GE, Philips) operating at 3T, with one submission acquired at 0.35T. To enhance reproducibility and transparency, data submission, pipeline development, and analysis were conducted using open-source platforms. For participants collecting data at multiple sites, both inter-submission and intra-submission comparisons were performed by selecting one dataset per submission.
+
+The results of the challenge were promising, with a total of 18 submissions accepted, consisting of 38 phantom datasets and 56 datasets from healthy human subjects. The mean coefficient of variation (CoV) for inter-submission phantom measurements was 6.1%, nearly twice as high as the evaluated intra-submission CoV of 2.9%. A similar trend was observed in the human data, where the inter-submission CoV for the genu was 6.0% compared to the intra-submission CoV of 2.9%, and for the cortical gray matter, the inter-submission CoV was 16% while the intra-submission CoV was 6.9%.
+
+The evaluation of the imaging protocol and fitting algorithm based on Barral et al. (2010) demonstrated good reproducibility of both phantom and human brain T<sub>1</sub> measurements. However, variations in the implementation of the protocol among the submissions led to higher variance in reported values relative to the intra-submission variability. This finding underscores the importance of standardized protocols and consistent implementation to ensure reliable and comparable T<sub>1</sub> measurements across different imaging centers.
+
+One of the major outcomes of the challenge was the creation of a large open database of inversion recovery T<sub>1</sub> mapping acquisitions, which encompasses data acquired from multiple sites and MRI vendors. This database, accessible at osf.io/ywc9g/, holds significant value for the wider research community, enabling researchers to explore and engage with a comprehensive collection of T<sub>1</sub> mapping data. To further facilitate access and utilization of the dataset, an interactive dashboard was developed, accessible at https://rrsg2020.dashboards.neurolibre.org.
+
+Overall, this T<sub>1</sub> mapping reproducibility challenge fills a critical need in the field by addressing the inconsistency of T<sub>1</sub> values across different protocols, sites, and vendors. The findings and resources generated through this challenge will contribute to the standardization and improvement of T<sub>1</sub> mapping techniques, promoting greater reliability and comparability of T<sub>1</sub> measurements. Ultimately, these advancements will enhance the accuracy and clinical relevance of T<sub>1</sub> mapping in various research and clinical applications, fostering advancements in precision medicine and improving patient care.
 
 # Figures
 
