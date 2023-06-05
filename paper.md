@@ -125,12 +125,87 @@ authors:
     orcid: 0000-0002-8480-5230
     affiliation: 40
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University, USA
+ - name: NeuroPoly Lab, Polytechnique Montréal, Montreal, Quebec, Canada
    index: 1
- - name: Institution Name, Country
+ - name: Montreal Heart Institute, Montreal, Quebec, Canada
    index: 2
- - name: Independent Researcher, Country
+ - name: Unité de Neuroimagerie Fonctionnelle (UNF), Centre de recherche de l’Institut Universitaire de Gériatrie de Montréal (CRIUGM), Montreal, Quebec, Canada
    index: 3
+ - name: Mila - Quebec AI Institute, Montreal, QC, Canad
+   index: 4
+ - name: Centre de recherche du CHU Sainte-Justine, Université de Montréal, Montreal, QC, Canada
+   index: 5
+ - name: Magnetic Resonance Engineering Laboratory (MREL), University of Southern California, Los Angeles, California, USA
+   index: 6
+ - name: Medical Physics, Ingham Institute for Applied Medical Research, Liverpool, Australia
+   index: 7
+ - name: Department of Medical Physics, Liverpool and Macarthur Cancer Therapy Centres, Liverpool, Australia
+   index: 8
+ - name: Department of Information Engineering, University of Padova, Padova, Italy
+   index: 9
+ - name: Institute of Neurobiology, Universidad Nacional Autónoma de México Campus Juriquilla, Querétaro, México
+   index: 10
+ - name: Philips Research Hamburg, Germany
+   index: 11
+ - name: Stanford University, Stanford, California, United States
+   index: 12
+ - name: Medical Physics Unit, McGill University, Montreal, Canada
+   index: 13
+ - name: University of British Columbia, Vancouver, Canada
+   index: 14
+ - name: Department of Medical Imaging, McGill University Health Centre, Montrea, Quebec, Canada
+   index: 15
+ - name: Department of Radiology, McGill University, Montreal, Quebec, Canada
+   index: 16
+ - name: Department of Diagnostic and Interventional Imaging, University of Texas Health Science Center at Houston, McGovern Medical School, Houston, Texas, USA
+   index: 17
+ - name: MR Clinical Science, Philips Canada, Mississauga, Ontario, Canada
+   index: 18
+ - name: Department of Human Oncology, University of Wisconsin-Madison, Madison, Wisconsin, USA
+   index: 19
+ - name: Centre for Medical Image Computing, Department of Computer Science, University College London, London, UK
+   index: 20
+ - name: Lysholm Department of Neuroradiology, National Hospital for Neurology and Neurosurgery, University College London Hospitals NHS Foundation Trust, London, UK
+   index: 21
+ - name: Department of Biomedical Engineering, Case Western Reserve University, Cleveland, Ohio, USA
+   index: 22
+ - name: Department of Medical Radiation Sciences, Institute of Clinical Sciences, Sahlgrenska Academy, University of Gothenburg, Gothenburg, Sweden
+   index: 23
+ - name: Biomedical Engineering, Sahlgrenska University Hospital, Gothenburg, Sweden
+   index: 24
+ - name: Center for Mind/Brain Sciences, University of Trento, Italy
+   index: 25
+ - name: Hopital Maisonneuve-Rosemont, Montreal, Canada
+   index: 26
+ - name: Bioengineering, Imperial College London, UK
+   index: 27
+ - name: Radiotherapy and Imaging, Insitute of Cancer Research, Imperial College London, UK
+   index: 28
+ - name: Research Institute of the McGill University Health Centre, Montreal, Canada
+   index: 29
+ - name: Clinical Science, Philips Healthcare, Germany
+   index: 30
+ - name: Department of Radiological Sciences, University of California Los Angeles, Los Angeles, CA, USA
+   index: 31
+ - name: Physics and Biology in Medicine IDP, University of California Los Angeles, Los Angeles, CA, USA
+   index: 32
+ - name: Douglas Brain Imaging Centre, Montreal, Canada
+   index: 33
+ - name: Sunnybrook Research Institute, Toronto, Canada
+   index: 34
+ - name: National Laboratory for Magnetic Resonance Imaging, Institute of Neurobiology, Universidad Nacional Autónoma de México (UNAM), Juriquilla, Mexico
+   index: 35
+ - name: Computer Science Department, Centro de Investigación en Matemáticas, A.C., Guanajuato, México
+   index: 36
+ - name: Medical Research Council, London Institute of Medical Sciences, Imperial College London, London, United Kingdom
+   index: 37
+ - name: Department of Radiation Oncology - CNS Service, The University of Texas MD Anderson Cancer Center, Texas, USA
+   index: 38
+ - name: Department of Biomedical Engineering, University of British Columbia, British Columbia, Canada
+   index: 39
+ - name: Center for Advanced Interdisciplinary Research, Ss. Cyril and Methodius University, Skopje, North Macedonia
+   index: 40
+   
 date: 13 August 2017
 bibliography: paper.bib
 
