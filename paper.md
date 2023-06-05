@@ -1,11 +1,11 @@
 ---
 title: 'Results of the ISMRM 2020 joint Reproducible Research & Quantitative MR study groups reproducibility challenge on phantom and human brain T<sub>1</sub> mapping'
 tags:
-  - MRI
-  - reproducibility
-  - relaxometry
   - quantitative MRI
-  - open science
+  - T1 mapping
+  - inversion recovery
+  - reproducibility
+  - open data
 authors:
   - name: Mathieu Boudreau
     corresponding: true
@@ -217,15 +217,7 @@ aas-journal: Astrophysical Journal <- The name of the AAS journal.
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+We present the results of the ISMRM 2020 joint Reproducible Research and Quantitative MR study groups reproducibility challenge on T<sub>1</sub> mapping in phantom and human brain. T<sub>1</sub> mapping, a widely used quantitative MRI technique, exhibits inconsistent tissue-specific values across protocols, sites, and vendors. The challenge aimed to assess the reliability of an independently-implemented image acquisition protocol using inversion recovery in a standardized phantom and healthy human brains. Participants acquired T1 mapping data from MRIs of three manufacturers at 3T, resulting in 38 phantom datasets and 56 datasets from healthy human subjects. The robust imaging protocol and fitting algorithm demonstrated good reproducibility in both phantom and human brain T<sub>1</sub> measurements. However, variations in implementation led to higher variance in reported values compared to intra-submission variability. This challenge resulted in the creation of a comprehensive open database of T<sub>1</sub> mapping acquisitions, accessible at osf.io/ywc9g/, and an interactive dashboard at https://rrsg2020.dashboards.neurolibre.org for wider community access and engagement.
 
 # Statement of need
 
@@ -260,7 +252,6 @@ Figure sizes can be customized by adding an optional second parameter:
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+The conception of this collaborative reproducibility challenge originated from discussions with experts, including Paul Tofts, Joëlle Barral, and Ilana Leppert, who provided valuable insights. Additionally, Kathryn Keenan, Zydrunas Gimbutas, and Andrew Dienstfrey from NIST provided their code to generate the ROI template for the ISMRM/NIST phantom. Dylan Roskams-Edris and Gabriel Pelletier from the Tanenbaum Open Science Institute (TOSI) offered valuable insights and guidance related to data ethics and data sharing in the context of this international multi-center conference challenge. The 2020 RRSG study group committee members who launched the challenge, Martin Uecker, Florian Knoll, Nikola Stikov, Maria Eugenia Caligiuri, and Daniel Gallichan, as well as the 2020 qMRSG committee members, Kathryn Keenan, Diego Hernando, Xavier Golay, Annie Yuxin Zhang, and Jeff Gunter, also played an essential role in making this challenge possible. Finally, we extend our thanks to all the volunteers and individuals who helped with the scanning at each imaging site.
 
 # References
