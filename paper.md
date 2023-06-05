@@ -227,18 +227,14 @@ The results of the challenge were promising, with a total of 18 submissions acce
 
 The evaluation of the imaging protocol and fitting algorithm based on Barral et al. (2010) demonstrated good reproducibility of both phantom and human brain T<sub>1</sub> measurements. However, variations in the implementation of the protocol among the submissions led to higher variance in reported values relative to the intra-submission variability. This finding underscores the importance of standardized protocols and consistent implementation to ensure reliable and comparable T<sub>1</sub> measurements across different imaging centers.
 
-One of the major outcomes of the challenge was the creation of a large open database of inversion recovery T<sub>1</sub> mapping acquisitions, which encompasses data acquired from multiple sites and MRI vendors. This database, accessible at osf.io/ywc9g/, holds significant value for the wider research community, enabling researchers to explore and engage with a comprehensive collection of T<sub>1</sub> mapping data. To further facilitate access and utilization of the dataset, an interactive dashboard was developed, accessible at https://rrsg2020.dashboards.neurolibre.org.
+One of the major outcomes of the challenge was the creation of a large open database of inversion recovery T<sub>1</sub> mapping acquisitions, which encompasses data acquired from multiple sites and MRI vendors. This database, accessible at osf.io/ywc9g/, holds significant value for the wider research community, enabling researchers to explore and engage with a comprehensive collection of T<sub>1</sub> mapping data. To further facilitate access and utilization of the dataset, an interactive dashboard (\autoref{fig:dashboard}) was developed, accessible at https://rrsg2020.dashboards.neurolibre.org.
 
 Overall, this T<sub>1</sub> mapping reproducibility challenge fills a critical need in the field by addressing the inconsistency of T<sub>1</sub> values across different protocols, sites, and vendors. The findings and resources generated through this challenge will contribute to the standardization and improvement of T<sub>1</sub> mapping techniques, promoting greater reliability and comparability of T<sub>1</sub> measurements. Ultimately, these advancements will enhance the accuracy and clinical relevance of T<sub>1</sub> mapping in various research and clinical applications, fostering advancements in precision medicine and improving patient care.
 
 # Figures
 
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+![Dashboard. a) welcome page listing all the sites, the types of subject, and scanner, and the relationship between the three. Row b) shows two of the phantom dashboard tabs, and row c) shows two of the human data dashboard tabs Link: https://rrsg2020.dashboards.neurolibre.org
+\label{fig:dashboard}](dashboard.png)
 
 # Acknowledgements
 
