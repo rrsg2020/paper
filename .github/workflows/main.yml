@@ -29,12 +29,9 @@ jobs:
         pip install -r requirements.txt
     - name: Download data
       run: |
-        ls
         cd content
-        ls
-        repo2data -r ../binder/data_requirements.json
+        repo2data -r ../binder/data_requirement.json
         cd ..
-        ls
     - name: Postbuild
       run: |
         chmod +xxx binder/postBuild
