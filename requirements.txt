@@ -8,3 +8,5 @@ scipy
 markdown
 wget
 jupyterlab-mathjax3
+repo2data
+osfclient
