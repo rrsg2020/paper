@@ -1,0 +1,172 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.17/x64/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from os import path
+from pathlib import Path
+import os
+from repo2data.repo2data import Repo2Data
+
+if build == 'latest':
+    if path.isdir('analysis')== False:
+        !git clone https://github.com/rrsg2020/analysis.git
+        dir_name = 'analysis'
+        analysis = os.listdir(dir_name)
+
+        for item in analysis:
+            if item.endswith(".ipynb"):
+                os.remove(os.path.join(dir_name, item))
+            if item.endswith(".md"):
+                os.remove(os.path.join(dir_name, item))
+elif build == 'archive':
+    if os.path.isdir(Path('../../data')):
+        data_path = ['../../data/rrsg-2020-neurolibre']
+    else:
+        # define data requirement path
+        data_req_path = os.path.join("..", "binder", "data_requirement.json")
+        # download data
+        repo2data = Repo2Data(data_req_path)
+        data_path = repo2data.install()[0]
+
+# Imports
+
+from pathlib import Path
+import pandas as pd
+import json
+import nibabel as nib
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import Video
+import glob
+from analysis.src.plots import *
+from analysis.make_pooled_datasets import *
+
+# Configurations
+if build == 'latest':
+    configFile = Path('analysis/configs/3T_NIST_T1maps.json')
+    data_folder_name = 'analysis/3T_NIST_T1maps'
+
+    configFile_raw = Path('analysis/configs/3T_NIST.json')
+    data_folder_name_raw = 'analysis/3T_NIST'
+elif build=='archive':
+    configFile = Path(data_path[0] + '/rrsg-2020-neurolibre/analysis/configs/3T_NIST_T1maps.json')
+    data_folder_name = data_path[0] + '/rrsg-2020-neurolibre/analysis/3T_NIST_T1maps'
+
+    configFile_raw = Path(data_path[0] + '/rrsg-2020-neurolibre/analysis/configs/3T_NIST.json')
+    data_folder_name_raw = data_path[0] + '/rrsg-2020-neurolibre/analysis/3T_NIST'
+
+# Download datasets
+if not Path(data_folder_name).exists():
+    print(Path(data_folder_name))
+    make_pooled_dataset(configFile, data_folder_name)
+
+if not Path(data_folder_name_raw).exists():
+    make_pooled_dataset(configFile_raw, data_folder_name_raw)
+
+with open(configFile) as json_file:
+    configJson = json.load(json_file)
+
+with open(configFile_raw) as json_file:
+    configJson_raw = json.load(json_file)
+    
+def get_image(dataset_name, key2):
+    # Load T1 image data
+    t1_file = configJson[dataset_name]['datasets'][key2]['imagePath']
+    t1 = nib.load(Path(data_folder_name) / t1_file)
+    t1_volume = t1.get_fdata() 
+
+    # Load raw image data
+    raw_file = configJson_raw[dataset_name]['datasets'][key2]['imagePath']
+    raw = nib.load(Path(data_folder_name_raw) / raw_file)
+    raw_volume = raw.get_fdata() 
+
+    # Handle 2D vs 3D volume case
+    dims = t1_volume.shape
+    if (len(dims) == 2) or (np.min(dims) == 1):
+        im = np.rot90(t1_volume)
+        TI_1 = np.rot90(np.squeeze(raw_volume[:,:,0,0]))
+        TI_2 = np.rot90(np.squeeze(raw_volume[:,:,0,1]))
+        TI_3 = np.rot90(np.squeeze(raw_volume[:,:,0,2]))
+        TI_4 = np.rot90(np.squeeze(raw_volume[:,:,0,3]))    
+    else:
+        index_smallest_dim = np.argmin(dims)
+        numberOfSlices = dims[index_smallest_dim]
+        midSlice = int(np.round(numberOfSlices/2))
+
+        if index_smallest_dim == 0:
+            im = np.rot90(np.squeeze(t1_volume[midSlice,:,:]))
+            TI_1 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,0]))
+            TI_2 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,1]))
+            TI_3 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,2]))
+            TI_4 = np.rot90(np.squeeze(raw_volume[midSlice,:,:,3]))    
+        elif index_smallest_dim == 1:
+            im = np.rot90(np.squeeze(t1_volume[:,midSlice,:]))
+            TI_1 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,0]))
+            TI_2 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,1]))
+            TI_3 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,2]))
+            TI_4 = np.rot90(np.squeeze(raw_volume[:,midSlice,:,3]))
+        elif index_smallest_dim == 2:
+            im = np.rot90(np.squeeze(t1_volume[:,:,midSlice]))
+            TI_1 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,0]))
+            TI_2 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,1]))
+            TI_3 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,2]))
+            TI_4 = np.rot90(np.squeeze(raw_volume[:,:,midSlice,3]))
+
+    xAxis = np.linspace(0,im.shape[0]-1, num=im.shape[0])
+    yAxis = np.linspace(0,im.shape[1]-1, num=im.shape[1])
+    return im, xAxis, yAxis, TI_1, TI_2, TI_3, TI_4
+
+
+im_1, xAxis_1, yAxis_1, TI_1_1, TI_2_1, TI_3_1, TI_4_1 = get_image('wang_MDAnderson_NIST', 'day2_mag')
+
+im_2, xAxis_2, yAxis_2, TI_1_2, TI_2_2, TI_3_2, TI_4_2 = get_image('CStehningPhilipsClinicalScienceGermany_NIST', 'Bonn_MR1_magnitude')
+
+im_3, xAxis_3, yAxis_3, TI_1_3, TI_2_3, TI_3_3, TI_4_3 = get_image('mrel_usc_NIST', 'Session1_MR1')
+
+im_4, xAxis_4, yAxis_4, TI_1_4, TI_2_4, TI_3_4, TI_4_4 = get_image('karakuzu_polymtl_NIST', 'mni')
+
+im_5, xAxis_5, yAxis_5, TI_1_5, TI_2_5, TI_3_5, TI_4_5 = get_image('madelinecarr_lha_NIST', 'one')
+
+im_6, xAxis_6, yAxis_6, TI_1_6, TI_2_6, TI_3_6, TI_4_6 = get_image('matthewgrechsollars_ICL_NIST', 'magnitude')
+im_6 = np.flipud(im_6)
+TI_1_6 = np.flipud(TI_1_6)
+TI_2_6 = np.flipud(TI_2_6)
+TI_3_6 = np.flipud(TI_3_6)
+TI_4_6 = np.flipud(TI_4_6)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [0;32mIn[2], line 58[0m
+[1;32m     56[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m Path(data_folder_name)[38;5;241m.[39mexists():
+[1;32m     57[0m     [38;5;28mprint[39m(Path(data_folder_name))
+[0;32m---> 58[0m     [43mmake_pooled_dataset[49m[43m([49m[43mconfigFile[49m[43m,[49m[43m [49m[43mdata_folder_name[49m[43m)[49m
+[1;32m     60[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m Path(data_folder_name_raw)[38;5;241m.[39mexists():
+[1;32m     61[0m     make_pooled_dataset(configFile_raw, data_folder_name_raw)
+
+File [0;32m~/work/paper/paper/content/analysis/make_pooled_datasets.py:23[0m, in [0;36mmake_pooled_dataset[0;34m(configFilename, outputFolder)[0m
+[1;32m     19[0m     outputFolder [38;5;241m=[39m args[[38;5;241m1[39m]
+[1;32m     22[0m [38;5;66;03m# Load config file for datasets[39;00m
+[0;32m---> 23[0m [38;5;28;01mwith[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mconfigFilename[49m[43m)[49m [38;5;28;01mas[39;00m json_file:
+[1;32m     24[0m     data [38;5;241m=[39m json[38;5;241m.[39mload(json_file)
+[1;32m     26[0m [38;5;66;03m# Download all datasets to one folder[39;00m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'rrsg-2020-neurolibre/analysis/configs/3T_NIST_T1maps.json'
+FileNotFoundError: [Errno 2] No such file or directory: 'rrsg-2020-neurolibre/analysis/configs/3T_NIST_T1maps.json'
+
