@@ -19,7 +19,7 @@ authors:
   - name: Julien Cohen-Adad
     orcid: 0000-0003-3662-9532
     affiliation: "1, 3, 4, 5"
-  - name: Ecem Bozhurt
+  - name: Ecem Bozkurt
     affiliation: 6
   - name: Madeline Carr
     orcid: 0000-0002-4915-5076
@@ -109,7 +109,7 @@ authors:
     orcid: 0000-0002-8559-4404
     affiliation: 6
   - name: Chenyang Wang
-    orcid: https://orcid.org/0000-0001-6798-0857
+    orcid: 0000-0001-6798-0857
     affiliation: 38
   - name:  Kilian Weis
     affiliation: 30
@@ -119,7 +119,7 @@ authors:
     orcid: 0000-0002-1057-7255
     affiliation: 30
   - name: Ziwei Zhao
-    orcid: https://orcid.org/0000-0003-0281-1141
+    orcid: 0000-0003-0281-1141
     affiliation: 6
   - name: Nikola Stikov
     orcid: 0000-0002-8480-5230
