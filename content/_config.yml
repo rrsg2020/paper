@@ -19,3 +19,8 @@ only_build_toc_files: true
 
 execute:
   timeout: 600
+
+sphinx:
+  config:
+    bibtex_reference_style: author_year
+    bibtex_bibfiles: "references.bib"
