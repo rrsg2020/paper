@@ -15,7 +15,7 @@ authors:
   - name: Agah Karakuzu
     equal-contrib: true
     orcid: 0000-0001-7283-271X
-    affiliation: 1
+    affiliation: "1, 2"
   - name: Julien Cohen-Adad
     orcid: 0000-0003-3662-9532
     affiliation: "1, 3, 4, 5"
@@ -113,7 +113,7 @@ authors:
     affiliation: 38
   - name:  Kilian Weis
     affiliation: 30
-  - name: Niloufar Zakariaei3
+  - name: Niloufar Zakariaei
     affiliation: 39
   - name: Shuo Zhang
     orcid: 0000-0002-1057-7255
@@ -123,7 +123,7 @@ authors:
     affiliation: 6
   - name: Nikola Stikov
     orcid: 0000-0002-8480-5230
-    affiliation: 40
+    affiliation: "1, 2, 40"
 affiliations:
  - name: NeuroPoly Lab, Polytechnique Montréal, Montreal, Quebec, Canada
    index: 1
@@ -213,13 +213,13 @@ bibliography: paper.bib
 
 # Summary
 
-We present the results of the ISMRM 2020 joint Reproducible Research and Quantitative MR study groups reproducibility challenge on T<sub>1</sub> mapping in phantom and human brain. T<sub>1</sub> mapping, a widely used quantitative MRI technique, exhibits inconsistent tissue-specific values across protocols, sites, and vendors. The challenge aimed to assess the reliability of an independently-implemented image acquisition protocol using inversion recovery in a standardized phantom and healthy human brains. Participants acquired T<sub>1</sub> mapping data from MRIs of three manufacturers at 3T, resulting in 38 phantom datasets and 56 datasets from healthy human subjects. The robust imaging protocol and fitting algorithm demonstrated good reproducibility in both phantom and human brain T<sub>1</sub> measurements. However, variations in implementation led to higher variance in reported values compared to intra-submission variability. This challenge resulted in the creation of a comprehensive open database of T<sub>1</sub> mapping acquisitions, accessible at osf.io/ywc9g/, and an interactive dashboard at https://rrsg2020.dashboards.neurolibre.org for wider community access and engagement.
+We present the results of the ISMRM 2020 joint Reproducible Research and Quantitative MR study groups reproducibility challenge on T<sub>1</sub> mapping in phantom and human brain. T<sub>1</sub> mapping, a widely used quantitative MRI technique, exhibits inconsistent tissue-specific values across protocols, sites, and vendors. The challenge aimed to assess the reliability of an independently-implemented image acquisition protocol using inversion recovery in a standardized phantom and healthy human brains. Participants acquired T<sub>1</sub> mapping data from MRIs of three manufacturers at 3T, resulting in 38 phantom datasets and 56 datasets from healthy human subjects. The robust imaging protocol and fitting algorithm demonstrated good reproducibility in both phantom and human brain T<sub>1</sub> measurements. However, variations in implementation led to higher variance in reported values compared to intra-submission variability. This challenge resulted in the creation of a comprehensive open database of T<sub>1</sub> mapping acquisitions, accessible at [osf.io/ywc9g/](https://osf.io/ywc9g/), and an [interactive dashboard](https://rrsg2020.db.neurolibre.org) for wider community access and engagement.
 
 # Statement of need
 
 T<sub>1</sub> mapping is a widely used quantitative MRI technique that provides valuable information about tissue properties. However, the field faces a significant challenge due to the inconsistency of tissue-specific T<sub>1</sub> values across different imaging protocols, sites, and vendors. This inconsistency hampers the comparability and reliability of T<sub>1</sub> measurements, limiting their utility in both research and clinical applications. To address this critical issue, the ISMRM Reproducible Research study group (RRSG) and Quantitative MR study group (qMRSG) collaborated to launch the T<sub>1</sub> mapping reproducibility challenge.
 
-The primary objective of the challenge was to investigate whether independently-implemented image acquisition protocols at multiple centers could reliably measure T<sub>1</sub> using inversion recovery in a standardized phantom and in the brains of healthy volunteers. By evaluating the reproducibility of a well-established T<sub>1</sub> mapping protocol and fitting algorithm from a reputable publication (Barral et al., 2010), the challenge aimed to identify sources of variability and establish best practices for achieving consistent and accurate T<sub>1</sub> measurements.
+The primary objective of the challenge was to investigate whether independently-implemented image acquisition protocols at multiple centers could reliably measure T<sub>1</sub> using inversion recovery in a standardized phantom and in the brains of healthy volunteers. By evaluating the reproducibility of a well-established T<sub>1</sub> mapping protocol and fitting algorithm from a reputable publication [@barral], the challenge aimed to identify sources of variability and establish best practices for achieving consistent and accurate T<sub>1</sub> measurements.
 
 A diverse group of participants was invited to acquire T<sub>1</sub> mapping data on a standard ISMRM/NIST phantom and/or in healthy human brains using MRI scanners from three different manufacturers (Siemens, GE, Philips) operating at 3T, with one submission acquired at 0.35T. To enhance reproducibility and transparency, data submission, pipeline development, and analysis were conducted using open-source platforms. For participants collecting data at multiple sites, both inter-submission and intra-submission comparisons were performed by selecting one dataset per submission.
 
@@ -227,13 +227,13 @@ The results of the challenge were promising, with a total of 18 submissions acce
 
 The evaluation of the imaging protocol and fitting algorithm based on Barral et al. (2010) demonstrated good reproducibility of both phantom and human brain T<sub>1</sub> measurements. However, variations in the implementation of the protocol among the submissions led to higher variance in reported values relative to the intra-submission variability. This finding underscores the importance of standardized protocols and consistent implementation to ensure reliable and comparable T<sub>1</sub> measurements across different imaging centers.
 
-One of the major outcomes of the challenge was the creation of a large open database of inversion recovery T<sub>1</sub> mapping acquisitions, which encompasses data acquired from multiple sites and MRI vendors. This database, accessible at osf.io/ywc9g/, holds significant value for the wider research community, enabling researchers to explore and engage with a comprehensive collection of T<sub>1</sub> mapping data. To further facilitate access and utilization of the dataset, an interactive dashboard (\autoref{fig:dashboard}) was developed, accessible at https://rrsg2020.dashboards.neurolibre.org.
+One of the major outcomes of the challenge was the creation of a large open database of inversion recovery T<sub>1</sub> mapping acquisitions, which encompasses data acquired from multiple sites and MRI vendors. This database, accessible at osf.io/ywc9g/, holds significant value for the wider research community, enabling researchers to explore and engage with a comprehensive collection of T<sub>1</sub> mapping data. To further facilitate access and utilization of the dataset, an interactive dashboard (\autoref{fig:dashboard}) was developed, accessible at [https://rrsg2020.db.neurolibre.org](https://rrsg2020.db.neurolibre.org).
 
 Overall, this T<sub>1</sub> mapping reproducibility challenge fills a critical need in the field by addressing the inconsistency of T<sub>1</sub> values across different protocols, sites, and vendors. The findings and resources generated through this challenge will contribute to the standardization and improvement of T<sub>1</sub> mapping techniques, promoting greater reliability and comparability of T<sub>1</sub> measurements. Ultimately, these advancements will enhance the accuracy and clinical relevance of T<sub>1</sub> mapping in various research and clinical applications, fostering advancements in precision medicine and improving patient care.
 
 # Figures
 
-![Dashboard. a) welcome page listing all the sites, the types of subject, and scanner, and the relationship between the three. Row b) shows two of the phantom dashboard tabs, and row c) shows two of the human data dashboard tabs Link: https://rrsg2020.dashboards.neurolibre.org
+![Dashboard. a) welcome page listing all the sites, the types of subject, and scanner, and the relationship between the three. Row b) shows two of the phantom dashboard tabs, and row c) shows two of the human data dashboard tabs Link: [https://rrsg2020.db.neurolibre.org](https://rrsg2020.db.neurolibre.org)
 \label{fig:dashboard}](dashboard.png)
 
 # Acknowledgements
