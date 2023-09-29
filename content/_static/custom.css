@@ -29,3 +29,23 @@ h1 {
 #main-content{
     margin: 0 auto;
 }
+
+.fa, .far, .fas {
+    color: red;
+}
+
+.header-article::after{
+  content: url('https://neurolibre.org/assets/joss2-b7ea8dd1f24ce2b0825db17e3495576253ba4c64df3384a66354713d76c40a75.svg');
+  width: 150px; 
+  height: 80px;
+  position: absolute;
+  right: 10px;
+}
+
+.header-article::before{
+  content: url('https://raw.githubusercontent.com/neurolibre/brand/b5e10e051a0059824ca2f4204e1288927e551d49/svg/neurolibre_logo.svg');
+  width: 33px; 
+  height: 33px;
+  position: absolute;
+  left: 10px;
+}
