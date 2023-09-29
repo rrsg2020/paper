@@ -1,0 +1,31 @@
+p {
+  text-align: justify;
+}
+a {
+  color: #870000!important;
+}
+a:hover {
+  color: brick!important;
+}
+a:visited {
+  color: #6f42c1!important;
+}
+body, h1, h2, h3, h4, h5 {
+    font-family: 'STIX Two Text';
+}
+h1 {
+    color: #342727!important;
+}
+.caption {
+    text-align:justify;
+    line-height:1.25;
+    font-size:80%
+}
+
+#site-navigation {
+    display: none;
+}
+
+#main-content{
+    margin: 0 auto;
+}
