@@ -51,3 +51,14 @@ h1 {
   left: 10px;
 }
 
+button.headerbtn {
+  position: absolute;
+  left: 20%;
+  top: 10%;
+}
+
+button.headerbtn.menu-dropdown__trigger {
+  position: absolute;
+  left: 20%;
+  top: 10%;
+}
