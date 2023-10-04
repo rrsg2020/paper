@@ -234,7 +234,7 @@ Overall, this T<sub>1</sub> mapping reproducibility challenge fills a critical n
 # Figures
 
 ![Dashboard. a) welcome page listing all the sites, the types of subject, and scanner, and the relationship between the three. Row b) shows two of the phantom dashboard tabs, and row c) shows two of the human data dashboard tabs Link: [https://rrsg2020.db.neurolibre.org](https://rrsg2020.db.neurolibre.org)
-\label{fig:dashboard}](dashboard.png)
+\label{fig:dashboard}](featured.png)
 
 # Acknowledgements
 
