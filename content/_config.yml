@@ -9,6 +9,9 @@ logo: logo.png
 execute:
   execute_notebooks: force
 
+launch_buttons:
+  notebook_interface: jupyterlab 
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/rrsg2020/paper  # Online location of your book
