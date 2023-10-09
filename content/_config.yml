@@ -10,7 +10,7 @@ execute:
   execute_notebooks: force
 
 launch_buttons:
-  notebook_interface: jupyterlab 
+  notebook_interface: "jupyterlab"
 
 # Information about where the book exists on the web
 repository:
