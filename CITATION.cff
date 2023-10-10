@@ -1,0 +1,252 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Boudreau
+  given-names: Mathieu
+  orcid: "https://orcid.org/0000-0002-7726-4456"
+- family-names: Karakuzu
+  given-names: Agah
+  orcid: "https://orcid.org/0000-0001-7283-271X"
+- family-names: Cohen-Adad
+  given-names: Julien
+  orcid: "https://orcid.org/0000-0003-3662-9532"
+- family-names: Bozkurt
+  given-names: Ecem
+- family-names: Carr
+  given-names: Madeline
+  orcid: "https://orcid.org/0000-0002-4915-5076"
+- family-names: Castellaro
+  given-names: Marco
+  orcid: "https://orcid.org/0000-0002-1203-2670"
+- family-names: Concha
+  given-names: Luis
+  orcid: "https://orcid.org/0000-0002-7842-3869"
+- family-names: Doneva
+  given-names: Mariya
+- family-names: Dual
+  given-names: Seraina
+  orcid: "https://orcid.org/0000-0001-6867-8270"
+- family-names: Ensworth
+  given-names: Alex
+- family-names: Foias
+  given-names: Alexandru
+- family-names: Fortier
+  given-names: Véronique
+  orcid: "https://orcid.org/0000-0003-1859-003X"
+- family-names: Gabr
+  given-names: Refaat E.
+  orcid: "https://orcid.org/0000-0002-8802-3201"
+- family-names: Gilbert
+  given-names: Guillaume
+- family-names: Glide-Hurst
+  given-names: Carri K.
+  orcid: "https://orcid.org/0000-0001-7989-4382"
+- family-names: Grech-Sollars
+  given-names: Matthew
+  orcid: "https://orcid.org/0000-0003-3881-4870"
+- family-names: Hu
+  given-names: Siyuan
+- family-names: Jalnefjord
+  given-names: Oscar
+  orcid: "https://orcid.org/0000-0003-2741-5890"
+- family-names: Jovicich
+  given-names: Jorge
+  orcid: "https://orcid.org/0000-0001-9504-7503"
+- family-names: Keskin
+  given-names: Kübra
+  orcid: "https://orcid.org/0000-0003-4571-2813"
+- family-names: Koken
+  given-names: Peter
+- family-names: Kolokotronis
+  given-names: Anastasia
+- family-names: Kukran
+  given-names: Simran
+- family-names: Lee
+  given-names: Nam. G.
+  orcid: "https://orcid.org/0000-0001-5462-1492"
+- family-names: Levesque
+  given-names: Ives R.
+  orcid: "https://orcid.org/0000-0002-0546-1733"
+- family-names: Li
+  given-names: Bochao
+  orcid: "https://orcid.org/0000-0002-5267-9129"
+- family-names: Ma
+  given-names: Dan
+  orcid: "https://orcid.org/0000-0003-1664-9579"
+- family-names: Mädler
+  given-names: Burkhard
+  orcid: "https://orcid.org/0000-0002-1465-2961"
+- family-names: Maforo
+  given-names: Nyasha
+  orcid: "https://orcid.org/0000-0002-5741-7021"
+- family-names: Near
+  given-names: Jamie
+- family-names: Pasaye
+  given-names: Erick
+  orcid: "https://orcid.org/0000-0002-0637-0833"
+- family-names: Ramirez-Manzanares
+  given-names: Alonso
+  orcid: "https://orcid.org/0000-0001-6645-9162"
+- family-names: Statton
+  given-names: Ben
+  orcid: "https://orcid.org/0000-0001-5118-7977"
+- family-names: Stehning
+  given-names: Christian
+  orcid: "https://orcid.org/0000-0002-0660-840X"
+- family-names: Tambalo
+  given-names: Stefano
+  orcid: "https://orcid.org/0000-0003-2562-1324"
+- family-names: Tian
+  given-names: Ye
+  orcid: "https://orcid.org/0000-0002-8559-4404"
+- family-names: Wang
+  given-names: Chenyang
+  orcid: "https://orcid.org/0000-0001-6798-0857"
+- family-names: Weis
+  given-names: Kilian
+- family-names: Zakariaei
+  given-names: Niloufar
+- family-names: Zhang
+  given-names: Shuo
+  orcid: "https://orcid.org/0000-0002-1057-7255"
+- family-names: Zhao
+  given-names: Ziwei
+  orcid: "https://orcid.org/0000-0003-0281-1141"
+- family-names: Stikov
+  given-names: Nikola
+  orcid: "https://orcid.org/0000-0002-8480-5230"
+contact:
+- family-names: Boudreau
+  given-names: Mathieu
+  orcid: "https://orcid.org/0000-0002-7726-4456"
+doi: 10.55458
+message: To reference this work, please cite our reproducible preprint
+  in NeuroLibre.
+preferred-citation:
+  authors:
+  - family-names: Boudreau
+    given-names: Mathieu
+    orcid: "https://orcid.org/0000-0002-7726-4456"
+  - family-names: Karakuzu
+    given-names: Agah
+    orcid: "https://orcid.org/0000-0001-7283-271X"
+  - family-names: Cohen-Adad
+    given-names: Julien
+    orcid: "https://orcid.org/0000-0003-3662-9532"
+  - family-names: Bozkurt
+    given-names: Ecem
+  - family-names: Carr
+    given-names: Madeline
+    orcid: "https://orcid.org/0000-0002-4915-5076"
+  - family-names: Castellaro
+    given-names: Marco
+    orcid: "https://orcid.org/0000-0002-1203-2670"
+  - family-names: Concha
+    given-names: Luis
+    orcid: "https://orcid.org/0000-0002-7842-3869"
+  - family-names: Doneva
+    given-names: Mariya
+  - family-names: Dual
+    given-names: Seraina
+    orcid: "https://orcid.org/0000-0001-6867-8270"
+  - family-names: Ensworth
+    given-names: Alex
+  - family-names: Foias
+    given-names: Alexandru
+  - family-names: Fortier
+    given-names: Véronique
+    orcid: "https://orcid.org/0000-0003-1859-003X"
+  - family-names: Gabr
+    given-names: Refaat E.
+    orcid: "https://orcid.org/0000-0002-8802-3201"
+  - family-names: Gilbert
+    given-names: Guillaume
+  - family-names: Glide-Hurst
+    given-names: Carri K.
+    orcid: "https://orcid.org/0000-0001-7989-4382"
+  - family-names: Grech-Sollars
+    given-names: Matthew
+    orcid: "https://orcid.org/0000-0003-3881-4870"
+  - family-names: Hu
+    given-names: Siyuan
+  - family-names: Jalnefjord
+    given-names: Oscar
+    orcid: "https://orcid.org/0000-0003-2741-5890"
+  - family-names: Jovicich
+    given-names: Jorge
+    orcid: "https://orcid.org/0000-0001-9504-7503"
+  - family-names: Keskin
+    given-names: Kübra
+    orcid: "https://orcid.org/0000-0003-4571-2813"
+  - family-names: Koken
+    given-names: Peter
+  - family-names: Kolokotronis
+    given-names: Anastasia
+  - family-names: Kukran
+    given-names: Simran
+  - family-names: Lee
+    given-names: Nam. G.
+    orcid: "https://orcid.org/0000-0001-5462-1492"
+  - family-names: Levesque
+    given-names: Ives R.
+    orcid: "https://orcid.org/0000-0002-0546-1733"
+  - family-names: Li
+    given-names: Bochao
+    orcid: "https://orcid.org/0000-0002-5267-9129"
+  - family-names: Ma
+    given-names: Dan
+    orcid: "https://orcid.org/0000-0003-1664-9579"
+  - family-names: Mädler
+    given-names: Burkhard
+    orcid: "https://orcid.org/0000-0002-1465-2961"
+  - family-names: Maforo
+    given-names: Nyasha
+    orcid: "https://orcid.org/0000-0002-5741-7021"
+  - family-names: Near
+    given-names: Jamie
+  - family-names: Pasaye
+    given-names: Erick
+    orcid: "https://orcid.org/0000-0002-0637-0833"
+  - family-names: Ramirez-Manzanares
+    given-names: Alonso
+    orcid: "https://orcid.org/0000-0001-6645-9162"
+  - family-names: Statton
+    given-names: Ben
+    orcid: "https://orcid.org/0000-0001-5118-7977"
+  - family-names: Stehning
+    given-names: Christian
+    orcid: "https://orcid.org/0000-0002-0660-840X"
+  - family-names: Tambalo
+    given-names: Stefano
+    orcid: "https://orcid.org/0000-0003-2562-1324"
+  - family-names: Tian
+    given-names: Ye
+    orcid: "https://orcid.org/0000-0002-8559-4404"
+  - family-names: Wang
+    given-names: Chenyang
+    orcid: "https://orcid.org/0000-0001-6798-0857"
+  - family-names: Weis
+    given-names: Kilian
+  - family-names: Zakariaei
+    given-names: Niloufar
+  - family-names: Zhang
+    given-names: Shuo
+    orcid: "https://orcid.org/0000-0002-1057-7255"
+  - family-names: Zhao
+    given-names: Ziwei
+    orcid: "https://orcid.org/0000-0003-0281-1141"
+  - family-names: Stikov
+    given-names: Nikola
+    orcid: "https://orcid.org/0000-0002-8480-5230"
+  date-published: 2023-10-09
+  doi: 10.55458/neurolibre.00014
+  journal: NeuroLibre Reproducible Preprints
+  publisher:
+    name: NeuroLibre
+  title: Results of the ISMRM 2020 joint Reproducible Research &
+    Quantitative MR study groups reproducibility challenge on phantom
+    and human brain T1 mapping
+  type: preprint
+  url: "https://neurolibre.org/papers/10.55458/neurolibre.00014"
+title: Results of the ISMRM 2020 joint Reproducible Research &
+  Quantitative MR study groups reproducibility challenge on phantom and
+  human brain T`<sub>`{=html}1`</sub>`{=html} mapping
